@@ -14,10 +14,11 @@ print_r($op_rows);
 
 
 ?>
-<form action="../api/edit_vote.php" method="post">
-    <div>
-        <label>主題</label>
-        <input name="subject" value="<?= $rows[0]['subject'] ?>">
+
+<form action="./api/post_vote.php" method="post">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">主題</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="subject" value="<?= $rows[0]['subject'] ?>">
     </div>
     <div class="time-set">
         <div>
@@ -30,39 +31,33 @@ print_r($op_rows);
         </div>
     </div>
 
-
-    <div>
-        <label>單複選</label>
-        <input name="q_type" value="<?= $rows[0]['type'] ?>">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">單複選</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="q_type" value="<?= $rows[0]['type'] ?>">
     </div>
-    <?php
 
-    ?>
-    <?php
-    foreach($op_rows as $op){
-    ?>
     <div class="options">
+    <?php
+foreach($op_rows as $opt){
+    echo $opt;
+?>
         <div>
-            <input type="hidden" value="">
             <label for="description">項目：</label>
-            <input type="text" name="q_option[]" class="description-input">
+            <input type="text" name="q_option[]" class="description-input" value="<?= $opt?>">
             <span onclick="addOption()">+</span>
             <span onclick="removeOption(this)">-</span>
         </div>
-    </div>
-    <?php
-    };
+        <?php
+}
     ?>
-
-
-
-
-
-    <div>
-        <input type="submit" value="新增文章">
     </div>
+    
+    </br>
 
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+
 
 <script>
     function addOption() {
