@@ -1,12 +1,3 @@
-<?php
-        if(empty($_GET)){
-            $go="hot";
-
-        }else{
-            $go=$_GET['go'];
-        }
-
-?>
 
 <!doctype html>
 <html lang="en">
@@ -58,19 +49,21 @@
       </nav>
       <div class="box container">
       <br>
-      <?php
-      $go=$_GET['go']??"hot";
+<?php
+      $go=$_GET['go']??"vote_list";
       
-      $file="front/".$go.".php";
+      $file="back/".$go.".php";
       if(file_exists($file)){
         include $file; 
       }else{
-        include "./front/hot.php";
+        include "./back/vote_list.php";
       }
       
 
-      ?>
-      </div>
+    ?>
+
+
+</div>
       
       
 
