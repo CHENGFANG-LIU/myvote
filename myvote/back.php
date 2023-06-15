@@ -1,3 +1,7 @@
+<?php
+include_once "common.php";
+$User->validate();
+?>
 
 <!doctype html>
 <html lang="en">
