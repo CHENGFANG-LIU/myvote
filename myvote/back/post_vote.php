@@ -15,8 +15,9 @@
     </div>
 
     <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">單複選</label>
-        <input type="text" class="form-control"  aria-describedby="emailHelp" name="q_type">
+    <label for="type">單複選：</label>
+            <input type="radio" name="q_type" value="1">單選&nbsp;&nbsp;
+            <input type="radio" name="q_type" value="2">複選
     </div>
     <div class="options">
         <div>

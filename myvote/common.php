@@ -9,6 +9,7 @@ class DB {
     protected $user = "root";
     protected $pw = "";
     protected $pdo;
+    protected $result;
     function _construct($table){
        
         $this->table = $table;
@@ -93,6 +94,7 @@ class DB {
     }
     function to($url){
         header("location:".$url);
+        
     }
     
     function validate(){

@@ -35,3 +35,4 @@ foreach($opts as $value){
         ]
     );
 }
+$Topics->to("../back.php");
