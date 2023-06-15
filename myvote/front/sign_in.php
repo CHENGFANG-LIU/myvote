@@ -167,6 +167,7 @@
     <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
     <!-- <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2023</p> -->
   </form>
+  <h5><a href="./index.php?go=sign">還不是會員?點我註冊</a></h5>
 </main>
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 

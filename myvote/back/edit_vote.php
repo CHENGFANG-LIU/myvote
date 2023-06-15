@@ -15,6 +15,7 @@ $op_rows = $Options->all(['topic_id' => $_GET['id']]);
 ?>
 
 <form action="./api/edit_vote.php" method="post">
+<?php echo $rows[0]['topic_id'] ?>
     <input type="hidden" name="topic_id" value="<?= $rows[0]['topic_id'] ?>">
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">主題</label>

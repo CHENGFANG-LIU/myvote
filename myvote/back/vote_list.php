@@ -31,10 +31,11 @@ foreach($rows as $row){
         <a href="./back.php?go=edit_vote&id=<?=$row['topic_id'];?>">修改</a>
         </td>
         <td style="width:20%;">
-        <a href="">刪除</a>
+        <a href="./api/delete_vote.php?topic_id=<?=$row['topic_id'];?>">刪除</a>
         </td>
     
 <?php
 }
+
 ?>
 </table>

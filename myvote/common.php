@@ -10,11 +10,7 @@ class DB {
     protected $pw = "";
     protected $pdo;
     protected $result;
-    function _construct($table){
-       
-        $this->table = $table;
-        $this->pdo = new PDO($this->dsn, $this->user, $this->pw);
-    }
+    
     function __construct($table)
     {
         $this->table = $table;
@@ -41,6 +37,17 @@ class DB {
                 echo $sql;
             return $this->pdo->exec($sql);
         }
+    }
+    function topic_update($cols){
+        foreach($cols as $key => $value){
+            if($key!='topic_id'){
+                $tmp[]= "`$key`='$value'";
+            }
+        }
+    
+        $sql="update `$this->table` set  ".join(",",$tmp)." where `topic_id`='{$cols['topic_id']}'";
+
+        return $this->pdo->exec($sql);
     }
     function all(...$arg)
     {
@@ -86,9 +93,32 @@ class DB {
         $this->result=$this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
         return $this->result;
     }
+    function delete(...$arg){
+        $sql = "delete from $this->table  ";
+
+        if (!empty($arg)) {
+            if (is_array($arg[0])) {
+                foreach ($arg[0] as $key => $value) {
+
+                    $tmp[] = "`$key`='$value'";
+                }
+
+                $sql = $sql .  " where " . join(" && ", $tmp);
+            } else {
+
+                $sql = $sql .  $arg[0];
+            }
+        }
+
+        if (isset($arg[1])) {
+            $sql = $sql .  $arg[1];
+        }
+        //echo $sql;
+        return $this->pdo->exec($sql);
+    }
     function q($sql){
-        $dsn="mysql:host=localhost;charset=utf8;dbname=myvote";
-        $pdo=new PDO($dsn,'root','');
+        // $dsn="mysql:host=localhost;charset=utf8;dbname=myvote";
+        $pdo=new PDO($this->dsn,'root','');
     
         return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -114,11 +144,47 @@ class DB {
 
 }
 
+
+
+
+class OPT extends DB{
+    
+    function update($cols){
+        foreach($cols as $key => $value){
+            if($key!='topic_id'){
+                $tmp[]= "`$key`='$value'";
+            }
+        }
+    
+        $sql="update `$this->table` set  ".join(",",$tmp)." where `topic_id`='{$cols['topic_id']}'";
+
+        return $this->pdo->exec($sql);
+    }
+}
+
+class USER extends DB{
+    protected $id="user_id";
+    function update($cols){
+        foreach($cols as $key => $value){
+            if($key!="$this->id"){
+                $tmp[]= "`$key`='$value'";
+            }
+        }
+    
+        $sql="update `$this->table` set  ".join(",",$tmp)." where `$this->id`='{$cols[$this->id]}'";
+
+        return $this->pdo->exec($sql);
+    }
+}
+
+
+
+
 $Topics=new DB('topics');
 // echo "<h1>123</h1>";
 // echo $topics->table;
-$User=new DB("user");
+$User=new USER("user");
 
 
-$Options=new DB("options");
+$Options=new OPT("options");
 
